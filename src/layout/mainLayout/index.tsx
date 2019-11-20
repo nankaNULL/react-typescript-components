@@ -20,11 +20,9 @@ export interface MainLayoutProps {
   fetchUserInfo: Function;
   history: any;
 }
-@connect(
-  (state: any) => state.global,
-  (dispatch: any) => bindActionCreators({ ...globalActions }, dispatch)
-)
-export default class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutState>{
+const mapState = (state: any) => state.global;
+const mapDispatch = (dispatch: any) => bindActionCreators({ ...globalActions }, dispatch)
+class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutState>{
   constructor(props: MainLayoutProps) {
     super(props);
     this.state = {
@@ -42,7 +40,7 @@ export default class MainLayout extends React.PureComponent<MainLayoutProps, Mai
   }
 
   componentDidMount() {
-    const { userInfo, fetchUserInfo } = this.props; 
+    const { userInfo, fetchUserInfo } = this.props;
     !userInfo.username && fetchUserInfo();
   }
 
@@ -102,3 +100,4 @@ export default class MainLayout extends React.PureComponent<MainLayoutProps, Mai
     )
   }
 }
+export default connect(mapState, mapDispatch)(MainLayout);

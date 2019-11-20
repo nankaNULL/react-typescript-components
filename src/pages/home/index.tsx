@@ -1,25 +1,27 @@
 import React from 'react';
-import { Radio, message, Button } from 'antd';
+import { Radio, message, Button, Card, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { API } from '@/api';
+import MyButton from '@/components/button';
 const RadioGroup = Radio.Group;
 
 interface IState {
   radioValue: number;
+  loading: boolean;
 }
 interface IProps {
   history: any
 }
 
-@connect(
-  (state: any) => state.global,
-  () => { }
-)
-export default class Home extends React.PureComponent<IProps, IState>{
+const mapState = (state: any) => state.global;
+const mapDispatch = () => { };
+
+class Home extends React.PureComponent<IProps, IState>{
   constructor(props: IProps) {
     super(props);
     this.state = {
-      radioValue: 1
+      radioValue: 1,
+      loading: false
     }
   }
 
@@ -33,6 +35,11 @@ export default class Home extends React.PureComponent<IProps, IState>{
       }
     })
     console.log(document.cookie);
+
+    this.setState({loading: true})
+    setTimeout(() => {
+      this.setState({loading: false})
+    }, 1000)
   }
 
   handleChange = (e: any) => {
@@ -41,15 +48,20 @@ export default class Home extends React.PureComponent<IProps, IState>{
     })
   }
 
+  handleClick = () => {
+    console.log("click button");
+  }
+
   render() {
-    const { radioValue } = this.state;
+    const { radioValue, loading } = this.state;
     return (
       <div className="page-home">
-        <RadioGroup value={radioValue} onChange={this.handleChange}>
-          <Radio value={1}>test1</Radio>
-          <Radio value={2}>test2</Radio>
-        </RadioGroup>
+        <Card title="button">
+          <MyButton type="primary" loading={loading}>MY BUTTON</MyButton>
+        </Card>
       </div>
     )
   }
 }
+
+export default connect(mapState, mapDispatch)(Home);
