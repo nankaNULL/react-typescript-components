@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Routers } from './router';
-import store from './store'
+import store from './store';
+import './scss/index.scss';
 
 // 这里是新建的分支typescript
 const render = (Component: any) => 
