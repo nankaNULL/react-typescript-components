@@ -1,9 +1,12 @@
 import React from 'react';
-import { Radio, message, Button, Card, Icon } from 'antd';
+import { Radio, message, Button, Card, Icon, Collapse } from 'antd';
 import { connect } from 'react-redux';
 import { API } from '@/api';
 import MyButton from '@/components/button';
+import MyIcon from '@/components/icon';
+import MyTooltip from '@/components/tooltip';
 const RadioGroup = Radio.Group;
+const { Panel } = Collapse;
 
 interface IState {
   radioValue: number;
@@ -35,11 +38,6 @@ class Home extends React.PureComponent<IProps, IState>{
       }
     })
     console.log(document.cookie);
-
-    this.setState({loading: true})
-    setTimeout(() => {
-      this.setState({loading: false})
-    }, 1000)
   }
 
   handleChange = (e: any) => {
@@ -56,12 +54,25 @@ class Home extends React.PureComponent<IProps, IState>{
     const { radioValue, loading } = this.state;
     return (
       <div className="page-home">
-        <Card title="button">
-          <MyButton type="primary" loading={loading}>MY BUTTON</MyButton>
-        </Card>
+        <Collapse defaultActiveKey={[1, 2, 3]}>
+          <Panel header="button" key={1}>
+            <MyButton type="primary" loading={loading}>MY BUTTON</MyButton>
+          </Panel>
+          <Panel header="icon" key={2}>
+            <MyIcon type="bilibili" />
+          </Panel>
+          <Panel header="tooltip" key={3}>
+            <MyTooltip title="this is tooltip content" trigger="hover" mouseEnterDelay={0.5}>this is text</MyTooltip>
+          </Panel>
+        </Collapse>
       </div>
     )
   }
 }
 
 export default connect(mapState, mapDispatch)(Home);
+
+/**
+ * mouseEnterDelay
+ * mouseLeaveDelay // 这两个delay似乎是和显示隐藏的加载动画有关系
+ */
