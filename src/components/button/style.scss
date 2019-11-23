@@ -6,8 +6,8 @@ $default-color: #aaa;
   outline: 0;
   border-radius: 3px;
   background: #fff;
-  border-color: $primary-color;
-  color: $primary-color;
+  border-color: $default-color;
+  color: #666;
   height: 32px;
   padding: 0 15px;
   font-size: 14px;
@@ -47,7 +47,7 @@ $default-color: #aaa;
 .btn-default {
   background: #fff;
   border-color: $default-color;
-  color: #333;
+  color: #666;
 }
 // shape
 .btn-circle {

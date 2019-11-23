@@ -7,7 +7,7 @@ interface ButtonState {
 
 }
 interface ButtonProps {
-  children?: Object;
+  children?: React.ReactNode;
   type?: string;
   shape?: string;
   size?: string;
