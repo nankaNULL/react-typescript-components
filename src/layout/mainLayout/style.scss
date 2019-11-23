@@ -1,0 +1,40 @@
+body{
+  position: relative;
+  .layout-main{
+    height:100%;
+    box-sizing: border-box;
+    .header{
+      display:flex;
+      background: #fff;
+      .header-logo{
+        width: 200px
+      }
+      .top-nav-item{
+        height:64px;
+        line-height: 64px;
+      }
+      &.ant-layout-header{
+        padding-right: 20px;
+      }
+    }
+    .content{
+      position: absolute;
+      width:100%;
+      bottom: 69px;
+      top: 64px;
+    }
+    .footer{
+      position: absolute;
+      text-align: center;
+      bottom:0;
+      width:100%;
+      background: #fff;
+    }
+  }
+  .ant-dropdown-menu-item > a{
+    display: inline;
+  }
+  .ml-10{
+    margin-left: 10px;
+  }
+}

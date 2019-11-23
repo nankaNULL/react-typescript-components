@@ -1,0 +1,21 @@
+@keyframes loadingCircle {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.icon {
+  vertical-align: -0.125em;
+ 
+  & + span {
+    
+    margin-left: 8px;
+  }
+}
+// spin
+.icon-spin {
+  display: inline-block;
+  animation: loadingCircle 1s infinite linear;
+}
