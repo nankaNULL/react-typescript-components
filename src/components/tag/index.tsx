@@ -59,14 +59,9 @@ export default class MyTag extends React.PureComponent<TagProps, TagState> {
 
   render() {
     const { children, closable } = this.props;
-    return <Fragment>
-      <div>myTag</div>
-      <div>
-        <span className={this.getTagClassName()} style={this.getTagStyle()}>
-          {children}
-          {closable && <MyIcon type="close" className="tag-close" onClick={this.handleIconClose} />}
-        </span>
-      </div>
-    </Fragment>
+    return <span className={this.getTagClassName()} style={this.getTagStyle()}>
+      {children}
+      {closable && <MyIcon type="close" className="tag-close" onClick={this.handleIconClose} />}
+    </span>
   }
 }
