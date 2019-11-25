@@ -16,6 +16,8 @@ interface TooltipProps {
   trigger?: TooltipTrigger;
   placement?: TooltipPlacement;
   mouseEnterDelay?: number;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 interface TooltipState {
@@ -147,17 +149,17 @@ export default class MyTooltip extends React.PureComponent<TooltipProps, Tooltip
   }
 
   render() {
-    const { trigger, children } = this.props;
+    const { trigger, className, style, children } = this.props;
     const { visible } = this.state;
     return <span
       ref={this.saveTooltip}
-      style={{ border: '1px solid lightcoral' }}
+      style={style}
       onMouseEnter={trigger === 'click' ? undefined : this.onMouseEnter}
       onMouseLeave={trigger === 'click' ? undefined : this.onMouseLeave}
       onClick={trigger === 'click' ? this.onClick : undefined}
       className={classNames({
         'tooltip-hidden': !visible
-      })}
+      }, className)}
     >{children}</span>
   }
 }

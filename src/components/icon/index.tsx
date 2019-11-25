@@ -4,7 +4,10 @@ import './style.scss';
 
 interface IconProps {
   type?: string;
-  spin?: boolean
+  spin?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void);
 }
 
 export default class MyIcon extends React.PureComponent<IconProps, {}>{
@@ -12,11 +15,16 @@ export default class MyIcon extends React.PureComponent<IconProps, {}>{
     super(props);
   }
 
-  render() {
-    const { type, spin } = this.props;
-    return <i className={classNames('yuwan icon', {
+  getIconClassName = () => {
+    const { type, spin, className } = this.props;
+    return classNames('yuwan icon', {
       [`icon-${type}`]: Boolean(type),
-      [`icon-spin`]: !!spin || type === 'loading'
-    })}></i>
+      [`icon-spin`]: !!spin || type === 'loading',
+    }, className)
+  }
+
+  render() {
+    const { onClick, style } = this.props;
+    return <i className={this.getIconClassName()} style={style} onClick={onClick} ></i>
   }
 }
