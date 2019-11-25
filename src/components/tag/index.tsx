@@ -1,9 +1,7 @@
-import React, { Fragment } from 'react';
-import { Tag } from 'antd';
+import React from 'react';
 import classNames from 'classnames';
 import MyIcon from '@/components/icon';
 import './style.scss';
-import MyButton from '../button';
 
 interface TagProps {
   children?: React.ReactNode;
