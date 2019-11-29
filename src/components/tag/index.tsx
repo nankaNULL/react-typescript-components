@@ -5,23 +5,23 @@ import './style.scss';
 
 interface TagProps {
   children?: React.ReactNode;
-  closable?: Boolean;
+  closable?: boolean;
   onClose?: Function;
-  visible?: Boolean;
+  visible?: boolean;
   color?: string;
   className?: string;
   style?: React.CSSProperties;
 }
 
 interface TagState {
-  visible: Boolean;
+  visible: boolean;
 }
 
 export default class MyTag extends React.PureComponent<TagProps, TagState> {
   constructor(props: TagProps) {
     super(props);
     this.state = {
-      visible: ('visible' in props ? props.visible : true) as Boolean
+      visible: ('visible' in props ? props.visible : true) as boolean
     }
   }
 

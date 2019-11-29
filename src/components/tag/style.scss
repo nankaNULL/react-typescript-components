@@ -15,7 +15,7 @@
     color: rgba(0, 0, 0, 0.45);
     transform: scale(0.83333333) rotate(0deg);
     cursor: pointer;
-    transition: all 0.3s linear;
+    transition: all 0.3s ease-in-out;
     &:hover {
       color: rgba(0, 0, 0, 0.85);
     }
