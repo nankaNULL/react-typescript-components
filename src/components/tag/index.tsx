@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import MyIcon from '@/components/icon';
+import MyIcon from '../icon';
 import './style.scss';
 
 interface TagProps {

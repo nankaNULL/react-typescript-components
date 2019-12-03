@@ -1,8 +1,6 @@
-import React, { Fragment, ReactNode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Tooltip, Button } from 'antd';
 import classNames from 'classnames'
-import MyButton from '../button';
 import './style.scss';
 
 type TooltipTrigger = 'hover' | 'click';
