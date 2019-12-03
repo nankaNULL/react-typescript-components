@@ -1,7 +1,12 @@
 {
-  "name": "my-react",
-  "version": "1.0.0",
-  "description": "my first react project",
+  "name": "yuwan",
+  "version": "1.0.2",
+  "description": "components based on typescript & react",
+  "main": "./dist/yuwan.js",
+  "author": "yuwan",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile --config ./build/prod.js",
     "dev": "webpack-dev-server --progress --colors --config ./build/dev.js",
@@ -10,16 +15,20 @@
     "preview": "pushstate-server ./dist 1234"
   },
   "dependencies": {
+    "@types/prop-types": "^15.7.3",
+    "@types/shallowequal": "^1.1.1",
     "antd": "^3.25.2",
     "lodash": "^4.17.15",
     "mirror-creator": "^1.1.0",
+    "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "16.12.0",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "shallowequal": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
