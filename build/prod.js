@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const buildPath = path.resolve(__dirname, '../dist');
@@ -10,14 +9,12 @@ module.exports = {
   mode: 'production',
   context: path.resolve(__dirname, '../src/components'), // 解析起点
   entry: {
-    yuwan: './index.tsx',
-    // "yuwan.min": './index.tsx',
+    yuwan: ['./index.tsx', './style/index.scss'],
+    "yuwan.min": './index.tsx'
   },
   output: {
     path: buildPath, // 输出文件存放在本地的目录
-    // publicPath: './', // 配置发布到线上资源的 URL 前缀
-    // chunkFilename: 'js/[name].[hash].js', // 无入口的chunk在输出时的文件名称
-    filename: 'yuwan.js',
+    filename: '[name].js',
     library: 'yuwan',
     libraryTarget: "umd"
   },
@@ -41,7 +38,7 @@ module.exports = {
     {
       test: /\.(less|css)$/,
       use: [
-        'style-loader',
+        MiniCssExtractPlugin.loader,
         'css-loader',
         {
           loader: 'less-loader',
@@ -54,7 +51,7 @@ module.exports = {
     {
       test: /\.(scss|sass)$/,
       use: [
-        'style-loader', //上面的简写方式
+        MiniCssExtractPlugin.loader,
         'css-loader',
         'sass-loader'
       ]
@@ -69,9 +66,6 @@ module.exports = {
     hints: false,
   },
   optimization: {
-    // runtimeChunk: {
-    //   name: 'manifest'
-    // },
     minimize: true,
     noEmitOnErrors: true,
     minimizer: [
@@ -81,46 +75,16 @@ module.exports = {
         parallel: true,
         sourceMap: false
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({}),
     ],
-    splitChunks: {
-      minSize: 30000,
-      maxSize: 3000000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      name: true,
-      // cacheGroups: {
-      //   vendor: {
-      //     chunks: 'initial',
-      //     name: 'vendor',
-      //     test: 'vendor'
-      //   },
-      //   echarts: {
-      //     chunks: 'all',
-      //     name: 'echarts',
-      //     test: /[\\/]echarts[\\/]/,
-      //   }
-      // }
-    }
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: 'index.html',
-    // }),
-    // new webpack.NamedModulesPlugin(),
-    // new webpack.optimize.OccurrenceOrderPlugin(true),
-    // new MiniCssExtractPlugin({
-    //   filename: 'css/[name].[hash].css',
-    //   chunkFilename: 'css/[name].[hash].css'
-    // }),
+    new MiniCssExtractPlugin({
+      filename: 'yuwan.css',
+    }),
     new CopyWebpackPlugin([
-      //   {from: path.resolve(__dirname,'../public/config'),to:'config'},
-      //   {from: path.resolve(__dirname,'../public/mock'),to:'mock'},
-      //   {from: path.resolve(__dirname,'../public/images'),to:'images'},
-      { from: path.resolve(__dirname, '../public/fonts'), to: 'fonts' },
-      //   {from: path.resolve(__dirname,'../public/pages'),to:'pages'}
+      // { from: path.resolve(__dirname, '../public/images'), to: 'images' },
+      // { from: path.resolve(__dirname, '../public/fonts'), to: 'fonts' },
     ]),
     new webpack.DefinePlugin({
       __PRODUCTION: JSON.stringify(true)
