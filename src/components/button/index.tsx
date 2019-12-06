@@ -1,29 +1,28 @@
 import React from 'react';
 import MyIcon from '../icon';
 import classNames from 'classnames';
-import './style.scss';
 
-interface ButtonState {
-
-}
+type ButtonType = 'primary' | 'danger' | 'default';
+type ButtonShape = 'circle' | 'round';
+type ButtonSize = 'small' | 'large';
 interface ButtonProps {
   children?: React.ReactNode;
-  type?: string;
-  shape?: string;
-  size?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  type?: ButtonType;
+  shape?: ButtonShape;
+  size?: ButtonSize;
   loading?: boolean;
   disabled?: boolean;
   icon?: string;
   ghost?: boolean;
   block?: boolean;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void);
-  className?: string;
-  style?: React.CSSProperties;
 }
 
 const prefixCls = 'btn';
 
-export default class MyButton extends React.PureComponent<ButtonProps, ButtonState>{
+export default class MyButton extends React.PureComponent<ButtonProps, {}>{
   constructor(props: ButtonProps) {
     super(props);
   }

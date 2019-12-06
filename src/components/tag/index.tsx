@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import MyIcon from '../icon';
-import './style.scss';
 
 interface TagProps {
   children?: React.ReactNode;

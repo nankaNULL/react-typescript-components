@@ -1,8 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { last } from 'lodash';
-import { message } from 'antd';
-import './style.scss';
 import MyIcon from '../icon';
 
 interface MessageProps {
@@ -93,4 +91,5 @@ class MsgClass {
   }
 }
 
-export const MyMessage = new MsgClass();
+const MyMessage = new MsgClass();
+export default MyMessage;

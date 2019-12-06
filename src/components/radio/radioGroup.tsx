@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { MyRadioChangeEvent } from './radio';
-import './style.scss';;
 
 interface RadioGroupProps {
   children?: React.ReactNode;

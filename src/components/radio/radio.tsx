@@ -4,7 +4,6 @@ import shallowequal from 'shallowequal';
 import MyRadioGroup from './radioGroup';
 import * as PropTypes from 'prop-types';
 import { RadioContext, ContextParams } from './radioGroup';
-import './style.scss';
 
 interface RadioProps {
   children?: React.ReactNode;

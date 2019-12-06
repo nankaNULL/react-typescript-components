@@ -4,12 +4,12 @@ $active-color: lightcoral;
 $ease-in-out: cubic-bezier(0.78, 0.14, 0.15, 0.86); // ?
 .radio-wrapper {
   position: relative;
+  cursor: pointer;
   margin-right: 8px;
 }
 
 .radio {
   vertical-align: sub;
-  cursor: pointer;
   & + * {
     padding: 0px 8px;
   }

@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import './style.scss';
 
 interface IconProps {
   type?: string;
