@@ -1,8 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import shallowequal from 'shallowequal';
 import MyRadioGroup from './radioGroup';
-import * as PropTypes from 'prop-types';
 import { RadioContext, ContextParams } from './radioGroup';
 
 interface RadioProps {
@@ -53,36 +51,10 @@ class MyRadio extends React.PureComponent<RadioProps, RadioState> {
     this.state = {
       checked: this.initChecked()
     }
-    // this.context;
   }
-
-  // 在子组件中用于说明context接收的数据类型
-  // 名字需对应，否则接收不到
-  // static contextTypes = {
-  //   radioGroup: PropTypes.any,
-  // };
 
   // Radio.Group
   static Group: typeof MyRadioGroup;
-
-  // 只要父组件重新渲染了，即使传入子组件的 props 未发生变化，那么子组件也会重新渲染，进而触发 render。
-  // 所以当时 radioGroup 的 onChange 改变了state 之后，所有的radio组件都触发了这个函数
-  // 通过判断 选择是否更新
-  // pureComponent 和 Component 的区别就在于pureComponent多了一层shouldComponentUpdate(nextProps, nextState) 但他会阻止context
-  // shouldComponentUpdate(nextProps: Readonly<RadioProps>, nextState: Readonly<RadioState>, nextContext: any) {
-  //   console.log(nextProps, this.props, !shallowequal(nextProps, this.props))
-  //   return (
-  //     !shallowequal(nextProps, this.props)
-  //     || !shallowequal(nextState, this.state)
-  //     || !shallowequal(nextContext.radioGroup, this.context.radioGroup)
-  //   )
-  //   // shallowequal is like lodash's isEqualWith but for shallow (strict) equal.
-  //   // 会比较 Object.keys(state | props) 的长度是否一致，
-  //   // 每一个 key 是否两者都有，
-  //   // 并且是否是一个引用，
-  //   // 也就是只比较了第一层的值，确实很浅，所以深层的嵌套数据是对比不出来的。
-  //   // 而 isEqual 进行了深比较，isEqualWith 比 isEqual 多了一个 customizer 来定制比较值
-  // }
 
   // 初始化checked 
   initChecked = () => {

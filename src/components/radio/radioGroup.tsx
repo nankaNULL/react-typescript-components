@@ -1,6 +1,4 @@
-import React, { Fragment } from 'react';
-import classNames from 'classnames';
-import * as PropTypes from 'prop-types';
+import React from 'react';
 import { MyRadioChangeEvent } from './radio';
 
 interface RadioGroupProps {
@@ -43,38 +41,6 @@ export default class MyRadioGroup extends React.PureComponent<RadioGroupProps, R
     }
   }
 
-  /**
-   * // 老版context用法
-   * // 用于说明所传递的数据类型
-   * static childContextTypes = {
-   *   radioGroup: PropTypes.any,
-   * };
-   * // getChildContext表示该组件通过context传递数据，
-   * // 该方法返回的对象就是context需要传递的数据
-   * getChildContext() {
-   *   const { value } = this.state;
-   *   const { disabled } = this.props;
-   *   return {
-   *     radioGroup: {
-   *       value,
-   *       disabled,
-   *       onChange: this.hangleChange
-   *     }
-   *   };
-   * }
-   */
-  // 同之前 getChildContext类似，返回所需数据，
-  radioGroupContext = () => {
-    const { value } = this.state;
-    const { disabled } = this.props;
-    return {
-      type: 'radioGroup',
-      value,
-      disabled,
-      onChange: this.hangleChange
-    };
-  }
-
   static getDerivedStateFromProps(nextProps: RadioGroupProps, prevState: RadioGroupState) {
     if ('value' in nextProps) {
       return {
@@ -96,6 +62,18 @@ export default class MyRadioGroup extends React.PureComponent<RadioGroupProps, R
       value = childValue || undefined
     }
     return value;
+  }
+
+  // 向子组件传递值 
+  radioGroupContext = () => {
+    const { value } = this.state;
+    const { disabled } = this.props;
+    return {
+      type: 'radioGroup',
+      value,
+      disabled,
+      onChange: this.hangleChange
+    };
   }
 
   // 查找子元素下的 checked 项，对defaultChecked 并没有做处理
