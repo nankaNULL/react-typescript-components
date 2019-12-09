@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import './iconfont.js';
 
 interface IconProps {
   type?: string;
@@ -16,14 +17,17 @@ export default class MyIcon extends React.PureComponent<IconProps, {}>{
 
   getIconClassName = () => {
     const { type, spin, className } = this.props;
-    return classNames('yuwan icon', {
-      [`icon-${type}`]: Boolean(type),
+    return classNames('icon', {
       [`icon-spin`]: !!spin || type === 'loading',
     }, className)
   }
 
   render() {
-    const { onClick, style } = this.props;
-    return <i className={this.getIconClassName()} style={style} onClick={onClick} ></i>
+    const { onClick, style, type } = this.props;
+    return <span onClick={onClick}>
+      <svg className={this.getIconClassName()} style={style} aria-hidden="true">
+        <use xlinkHref={`#icon-${type}`}></use>
+      </svg>
+    </span>
   }
 }
