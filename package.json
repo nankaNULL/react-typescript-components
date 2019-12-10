@@ -1,6 +1,6 @@
 {
   "name": "yuwan",
-  "version": "1.0.5",
+  "version": "1.1.1",
   "description": "components based on typescript & react",
   "main": "./lib/index.js",
   "author": "yuwan",
@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --bail --progress --profile --config ./build/prod.js",
-    "compile": "rimraf lib && npx babel src/components --out-dir lib --extensions '.tsx' --copy-files",
+    "compile": "rimraf lib && npx babel src/components --out-dir lib --extensions '.tsx' --copy-files && node-sass src/components --output lib",
     "compile-css": "node-sass src/components --output lib",
     "dev": "webpack-dev-server --progress --colors --config ./build/dev.js",
     "test-watch": "karma start --auto-watch --no-single-run",
@@ -91,6 +91,6 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
-    "yuwan": "^1.0.5"
+    "yuwan": "^1.1.0"
   }
 }
