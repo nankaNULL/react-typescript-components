@@ -47,7 +47,7 @@ import 'yuwan/lib/style/index.css'
 ## 其他
 目前已有组件为 Button, Tag, Tooltip, message, Radio, Icon
 
-参考antd, 写的比较粗糙，希望大姐多给点意见，特别是message和Tooltip这两个组件
+参考antd, 写的比较粗糙，希望大家多给点意见，特别是message和Tooltip这两个组件
 
 一个是message其实是创建了一个类，然后输出了用这个类new出来的一个对象，这个写法感觉不是特别好
 
