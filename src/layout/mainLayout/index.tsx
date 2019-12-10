@@ -41,7 +41,7 @@ class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutState>{
 
   componentDidMount() {
     const { userInfo, fetchUserInfo } = this.props;
-    !userInfo.username && fetchUserInfo();
+    // !userInfo.username && fetchUserInfo();
   }
 
   logout = () => {

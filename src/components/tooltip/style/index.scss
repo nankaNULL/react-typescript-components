@@ -1,3 +1,6 @@
+.tooltip-wrapper{
+  display: inline-block;
+}
 .tooltip {
   position: absolute;
   display: inline-block;
@@ -57,8 +60,8 @@
   &.tooltip-placement-left {
     .tooltip-arrow {
       top: 50%;
-      right: 0;
-      transform: translate(100%, -50%) rotate(180deg);
+      left: 100%;
+      transform: translate(0, -50%) rotate(180deg);
     }
   }
 }

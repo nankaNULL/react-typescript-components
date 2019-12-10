@@ -1,9 +1,9 @@
 import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
-import createHistory from "history/createBrowserHistory";
-export const history = createHistory();
+import { createBrowserHistory } from 'history';
 // import routerConf from './routerConf.js'; // 如果是export default 用这个
 import { routerConf } from './routerConf';
+const history = createBrowserHistory();
 
 function getRouterConf(routerConf: any) {
   let myRoutes: Array<any> = [];

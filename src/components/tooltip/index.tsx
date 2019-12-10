@@ -1,31 +1,32 @@
-import React, { Fragment, ReactNode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Tooltip, Button } from 'antd';
 import classNames from 'classnames'
-import MyButton from '../button';
-import './style.scss';
 
 type TooltipTrigger = 'hover' | 'click';
 type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 
 interface TooltipProps {
   children?: React.ReactNode;
-  title?: React.ReactNode | (() => React.ReactNode);
+  title: React.ReactNode | (() => React.ReactNode);
   visible?: boolean;
   defaultVisible?: boolean;
   trigger?: TooltipTrigger;
   placement?: TooltipPlacement;
   mouseEnterDelay?: number;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 interface TooltipState {
   visible: boolean;
+  hasChange: boolean;
 }
 
 export default class MyTooltip extends React.PureComponent<TooltipProps, TooltipState> {
   constructor(props: TooltipProps) {
     super(props);
     this.state = {
+      hasChange: false,
       visible: !!props.visible || !!props.defaultVisible || false,
       // 这里其实还很粗糙，如果是visible={false}，他会往下找defaultValue, 而不是直接拿visible的false值
       // 这个问题在后面getDerivedStateFromProps中通过判断props中是否存在visible属性解决
@@ -36,15 +37,27 @@ export default class MyTooltip extends React.PureComponent<TooltipProps, Tooltip
   private tooltip: HTMLDivElement;
   private child: HTMLDivElement;
 
-  static getDerivedStateFromProps(nextProps: TooltipProps) {
-    if ('visible' in nextProps) {
-      return { visible: nextProps.visible };
+  static getDerivedStateFromProps(nextProps: TooltipProps, prevState: TooltipState) {
+    if ('visible' in nextProps && nextProps.visible !== prevState.visible) {
+      return {
+        visible: nextProps.visible,
+        hasChange: true
+      };
     }
     return null;
   }
 
   componentDidMount() {
     this.createContent();
+  }
+
+  componentDidUpdate() {
+    if (this.state.hasChange) {
+      this.setChildrenStyle();
+      this.setState({
+        hasChange: false
+      })
+    }
   }
 
   // 创建最外层，并挂在body上
@@ -81,7 +94,7 @@ export default class MyTooltip extends React.PureComponent<TooltipProps, Tooltip
       ['tooltip-hidden']: !visible
     })
 
-    this.setChildrenPosition();
+    visible && this.setChildrenPosition();
   }
 
   // 设置子节点位置
@@ -147,17 +160,18 @@ export default class MyTooltip extends React.PureComponent<TooltipProps, Tooltip
   }
 
   render() {
-    const { trigger, children } = this.props;
+    const { trigger, className, style, children } = this.props;
     const { visible } = this.state;
+    console.log("render")
     return <span
       ref={this.saveTooltip}
-      style={{ border: '1px solid lightcoral' }}
+      style={style}
       onMouseEnter={trigger === 'click' ? undefined : this.onMouseEnter}
       onMouseLeave={trigger === 'click' ? undefined : this.onMouseLeave}
       onClick={trigger === 'click' ? this.onClick : undefined}
-      className={classNames({
+      className={classNames('tooltip-wrapper', {
         'tooltip-hidden': !visible
-      })}
+      }, className)}
     >{children}</span>
   }
 }

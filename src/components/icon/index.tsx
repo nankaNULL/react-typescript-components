@@ -1,10 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import './style.scss';
+import './iconfont.js';
 
 interface IconProps {
   type?: string;
-  spin?: boolean
+  spin?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void);
 }
 
 export default class MyIcon extends React.PureComponent<IconProps, {}>{
@@ -12,11 +15,19 @@ export default class MyIcon extends React.PureComponent<IconProps, {}>{
     super(props);
   }
 
+  getIconClassName = () => {
+    const { type, spin, className } = this.props;
+    return classNames('icon', {
+      [`icon-spin`]: !!spin || type === 'loading',
+    }, className)
+  }
+
   render() {
-    const { type, spin } = this.props;
-    return <i className={classNames('yuwan icon', {
-      [`icon-${type}`]: Boolean(type),
-      [`icon-spin`]: !!spin || type === 'loading'
-    })}></i>
+    const { onClick, style, type } = this.props;
+    return <span onClick={onClick}>
+      <svg className={this.getIconClassName()} style={style} aria-hidden="true">
+        <use xlinkHref={`#icon-${type}`}></use>
+      </svg>
+    </span>
   }
 }
