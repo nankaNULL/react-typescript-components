@@ -1,2 +1,2 @@
 var test = 'emm';
-var test2 = 'emm2';
+var test2 = "emm2";
